@@ -1,5 +1,5 @@
 class RenteesController < ApplicationController
-  before_action :set_rentee, only: [:show, :edit, :update, :destroy]
+  before_action :set_rentee, only: [:show, :edit, :update, :destroy, :add_token]
 
   # GET /rentees
   # GET /rentees.json
@@ -46,6 +46,21 @@ class RenteesController < ApplicationController
         format.json { render :show, status: :ok, location: @rentee }
       else
         format.html { render :edit }
+        format.json { render json: @rentee.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add_token
+    # rentee_params
+    # binding.pry
+    @rentee.tokens += rentee_params[:tokens].to_i
+    respond_to do |format|
+      if @rentee.save
+        format.html { redirect_to @rentee, notice: 'Rentee was successfully updated.' }
+        format.json { render :show, status: :ok, location: @rentee }
+      else
+        format.html { redirect_to @rentee, notice: 'Rentee has error.' }
         format.json { render json: @rentee.errors, status: :unprocessable_entity }
       end
     end

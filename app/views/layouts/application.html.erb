@@ -36,11 +36,19 @@
     </ul>
   </div>
 </div>
+  <div class="container">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  <div>
+      <% if isAdmin? %>
+        <h1>I'm Admin!</h1>
+      <% end %>
 
+    <%= yield %>
 
+    </div>
 
-
-<%= yield %>
+  </div>
 
 </body>
 </html>

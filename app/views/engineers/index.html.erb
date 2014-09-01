@@ -16,9 +16,8 @@
         <td><%= engineer.name %></td>
         <td><%= engineer.phone %></td>
         <td><%= engineer.tokens %></td>
-        <td><%= link_to 'Show', engineer %></td>
-        <td><%= link_to 'Edit', edit_engineer_path(engineer) %></td>
-        <td><%= link_to 'Destroy', engineer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', rentee_engineer_path(engineer.rentee, engineer) %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Engineer', new_engineer_path %>
+<%= link_to 'New Engineer', new_rentee_engineer_path %>
