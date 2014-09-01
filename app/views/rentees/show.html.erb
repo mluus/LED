@@ -20,5 +20,27 @@
   <%= @rentee.tokens %>
 </p>
 
+<%= form_for(@rentee, url: add_token_rentee_path(@rentee)) do |f| %>
+  <% if @rentee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rentee.errors.count, "error") %> prohibited this rentee from being saved:</h2>
+
+      <ul>
+      <% @rentee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong>Add Tokens</strong><br>
+    <%= f.number_field :tokens, :value => '' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_rentee_path(@rentee) %> |
 <%= link_to 'Back', rentees_path %>

@@ -1,8 +1,7 @@
-<%= form_for(@engineer) do |f| %>
+<%= form_for([@rentee, @engineer]) do |f| %>
   <% if @engineer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@engineer.errors.count, "error") %> prohibited this engineer from being saved:</h2>
-
       <ul>
       <% @engineer.errors.full_messages.each do |message| %>
         <li><%= message %></li>

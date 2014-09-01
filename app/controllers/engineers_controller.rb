@@ -4,7 +4,9 @@ class EngineersController < ApplicationController
   # GET /engineers
   # GET /engineers.json
   def index
-    @engineers = Engineer.all
+    @engineers = Engineer.where(rentee_id: params[:rentee_id])
+
+
   end
 
   # GET /engineers/1
@@ -14,21 +16,27 @@ class EngineersController < ApplicationController
 
   # GET /engineers/new
   def new
+    @rentee = Rentee.find(params[:rentee_id])
     @engineer = Engineer.new
   end
 
   # GET /engineers/1/edit
   def edit
+    @rentee = Rentee.find(params[:rentee_id])
   end
 
   # POST /engineers
   # POST /engineers.json
   def create
     @engineer = Engineer.new(engineer_params)
+    r = Rentee.find(params[:rentee_id])
+    @engineer.rentee = r
+      if @engineer.save
+      end
 
     respond_to do |format|
       if @engineer.save
-        format.html { redirect_to @engineer, notice: 'Engineer was successfully created.' }
+        format.html { redirect_to [@engineer.rentee, @engineer], notice: 'Engineer was successfully created.' }
         format.json { render :show, status: :created, location: @engineer }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class EngineersController < ApplicationController
   def update
     respond_to do |format|
       if @engineer.update(engineer_params)
-        format.html { redirect_to @engineer, notice: 'Engineer was successfully updated.' }
+        format.html { redirect_to [@engineer.rentee, @engineer], notice: 'Engineer was successfully updated.' }
         format.json { render :show, status: :ok, location: @engineer }
       else
         format.html { render :edit }

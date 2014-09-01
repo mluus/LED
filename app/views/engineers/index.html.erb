@@ -1,6 +1,6 @@
 <h1>Listing engineers</h1>
 
-<table>
+<table class="table table-striped table-hover ">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,9 +16,8 @@
         <td><%= engineer.name %></td>
         <td><%= engineer.phone %></td>
         <td><%= engineer.tokens %></td>
-        <td><%= link_to 'Show', engineer %></td>
-        <td><%= link_to 'Edit', edit_engineer_path(engineer) %></td>
-        <td><%= link_to 'Destroy', engineer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', rentee_engineer_path(engineer.rentee, engineer) %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +25,18 @@
 
 <br>
 
-<%= link_to 'New Engineer', new_engineer_path %>
+<%= link_to 'New Engineer', new_rentee_engineer_path %>
+
+
+
+
+<!-- <div class="panel panel-primary">
+  <% @engineers.each do |engineer| %>
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= engineer.name %></h3>
+    </div>
+    <div class="panel-body">
+      <%= engineer.tokens %>
+    </div>
+  <% end %>
+</div> -->

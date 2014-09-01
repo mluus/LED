@@ -34,13 +34,23 @@
           <% end %>
 
     </ul>
+
   </div>
 </div>
 
+<div class="container">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
+  <div>
+    <% if isAdmin? %>
+      <h3>Logged in as Admin.</h3>
+    <% end %>
 
+  <%= yield %>
 
-<%= yield %>
+  </div>
 
+</div>
 </body>
 </html>
