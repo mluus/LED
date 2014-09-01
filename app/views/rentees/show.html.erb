@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rentee.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @rentee.phone %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @rentee.address %>
+</p>
+
+<p>
+  <strong>Tokens:</strong>
+  <%= @rentee.tokens %>
+</p>
+
+<%= link_to 'Edit', edit_rentee_path(@rentee) %> |
+<%= link_to 'Back', rentees_path %>

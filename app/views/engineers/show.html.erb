@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @engineer.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @engineer.phone %>
+</p>
+
+<p>
+  <strong>Tokens:</strong>
+  <%= @engineer.tokens %>
+</p>
+
+<%= link_to 'Edit', edit_engineer_path(@engineer) %> |
+<%= link_to 'Back', engineers_path %>

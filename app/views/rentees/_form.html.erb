@@ -1,0 +1,33 @@
+<%= form_for(@rentee) do |f| %>
+  <% if @rentee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rentee.errors.count, "error") %> prohibited this rentee from being saved:</h2>
+
+      <ul>
+      <% @rentee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :tokens %><br>
+    <%= f.number_field :tokens %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

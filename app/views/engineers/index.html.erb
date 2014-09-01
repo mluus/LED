@@ -1,0 +1,29 @@
+<h1>Listing engineers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Tokens</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @engineers.each do |engineer| %>
+      <tr>
+        <td><%= engineer.name %></td>
+        <td><%= engineer.phone %></td>
+        <td><%= engineer.tokens %></td>
+        <td><%= link_to 'Show', engineer %></td>
+        <td><%= link_to 'Edit', edit_engineer_path(engineer) %></td>
+        <td><%= link_to 'Destroy', engineer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Engineer', new_engineer_path %>

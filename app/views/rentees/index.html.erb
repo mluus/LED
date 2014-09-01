@@ -1,0 +1,31 @@
+<h1>Listing rentees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Tokens</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rentees.each do |rentee| %>
+      <tr>
+        <td><%= rentee.name %></td>
+        <td><%= rentee.phone %></td>
+        <td><%= rentee.address %></td>
+        <td><%= rentee.tokens %></td>
+        <td><%= link_to 'Show', rentee %></td>
+        <td><%= link_to 'Edit', edit_rentee_path(rentee) %></td>
+        <td><%= link_to 'Destroy', rentee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rentee', new_rentee_path %>
