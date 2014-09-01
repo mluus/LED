@@ -4,7 +4,7 @@ class EngineersController < ApplicationController
   # GET /engineers
   # GET /engineers.json
   def index
-    @engineers = Engineer.all
+    @engineers = Engineer.where(rentee_id: params[:rentee_id])
   end
 
   # GET /engineers/1
