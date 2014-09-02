@@ -1,10 +1,18 @@
 class RenteesController < ApplicationController
   before_action :set_rentee, only: [:show, :edit, :update, :destroy, :add_token]
+  before_action :authenticate_user!, :except => [:create]
+
 
   # GET /rentees
   # GET /rentees.json
   def index
     @rentees = Rentee.all
+
+    # @rentee = Rentee.find(params[:rentee_id])
+    # @rentee = Rentee.find(current_user.rentee.id)
+
+    redirect_to rentee_engineers_path(current_user.rentee) unless isAdmin?
+
   end
 
   # GET /rentees/1
@@ -28,6 +36,10 @@ class RenteesController < ApplicationController
 
     respond_to do |format|
       if @rentee.save
+        @user = User.new(:email => rentee_params[:email], :password => 'password', :password_confirmation => 'password')
+        @user.rentee = @rentee
+        @user.save
+
         format.html { redirect_to @rentee, notice: 'Rentee was successfully created.' }
         format.json { render :show, status: :created, location: @rentee }
       else
@@ -84,6 +96,6 @@ class RenteesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rentee_params
-      params.require(:rentee).permit(:name, :phone, :address, :tokens)
+      params.require(:rentee).permit(:name, :phone, :address, :tokens, :email)
     end
 end

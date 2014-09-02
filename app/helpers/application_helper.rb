@@ -7,15 +7,12 @@ module ApplicationHelper
     end
   end
 
- # current_admin == 'morne.luus@gmail.com'
- #    if isAdmin
- #    else
- #      'current_user'
-
-
-
   def isAdmin?
     current_user.email == 'morne.luus@gmail.com' unless current_user.blank?
+  end
+
+  def notAdmin?
+    current_user.email != 'morne.luus@gmail.com' unless current_user.blank?
   end
 end
 
