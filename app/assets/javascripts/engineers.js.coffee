@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+
+
+
+updateTokenEngineer = (renteeTokens, engineerTokens, addedTokens) ->
+  if addedTokens < renteeTokens
+    renteeTokens = renteeTokens - addedTokens
+    engineerTokens = engineerTokens + addedTokens
+  else
+    alert "Not enought tokens to distribute. Please purchase more"

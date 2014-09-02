@@ -5,6 +5,7 @@ class RenteesController < ApplicationController
   # GET /rentees.json
   def index
     @rentees = Rentee.all
+
   end
 
   # GET /rentees/1

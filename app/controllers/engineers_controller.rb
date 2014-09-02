@@ -5,13 +5,14 @@ class EngineersController < ApplicationController
   # GET /engineers.json
   def index
     @engineers = Engineer.where(rentee_id: params[:rentee_id])
-
-
+    @rentee = Rentee.find(params[:rentee_id])
   end
 
   # GET /engineers/1
   # GET /engineers/1.json
   def show
+    # @engineers = Engineer.where(rentee_id: params[:rentee_id])
+
   end
 
   # GET /engineers/new
@@ -57,6 +58,8 @@ class EngineersController < ApplicationController
         format.json { render json: @engineer.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # DELETE /engineers/1
