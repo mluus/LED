@@ -5,11 +5,13 @@ class EngineersController < ApplicationController
   # GET /engineers.json
   def index
     @engineers = Engineer.where(rentee_id: params[:rentee_id])
+    @rentee = Rentee.find(params[:rentee_id])
   end
 
   # GET /engineers/1
   # GET /engineers/1.json
   def show
+
   end
 
   # GET /engineers/new

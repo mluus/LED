@@ -4,11 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+
   def isAdmin?
     current_user.email == 'morne.luus@gmail.com' unless current_user.blank?
   end
 
-  # def notAdmin?
-  #   current_user.email != 'morne.luus@gmail.com' unless current_user.blank?
-  # end
+
 end

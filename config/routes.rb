@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
   devise_for :users
   root "rentees#index"
@@ -9,8 +10,6 @@ Rails.application.routes.draw do
     end
     resources :engineers
   end
-
 end
-
 
 

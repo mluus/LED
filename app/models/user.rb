@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
   def is_admin?
     current_user.email == 'morne.luus@gmail.com' unless current_user.blank?
   end
+
 end

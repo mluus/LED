@@ -1,5 +1,6 @@
 module ApplicationHelper
-    def nav_link(link_text, link_path, class_attributes = {})
+  def nav_link(link_text, link_path, class_attributes = {})
+
     class_name = current_page?(link_path) ? 'active' : ''
 
     content_tag(:li, :class => class_name) do
@@ -8,11 +9,10 @@ module ApplicationHelper
   end
 
   def isAdmin?
+
     current_user.email == 'morne.luus@gmail.com' unless current_user.blank?
   end
 
-  def notAdmin?
-    current_user.email != 'morne.luus@gmail.com' unless current_user.blank?
-  end
 end
+
 

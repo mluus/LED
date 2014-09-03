@@ -8,9 +8,6 @@ class RenteesController < ApplicationController
   def index
     @rentees = Rentee.all
 
-    # @rentee = Rentee.find(params[:rentee_id])
-    # @rentee = Rentee.find(current_user.rentee.id)
-
     redirect_to rentee_engineers_path(current_user.rentee) unless isAdmin?
 
   end
@@ -96,6 +93,7 @@ class RenteesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rentee_params
+
       params.require(:rentee).permit(:name, :phone, :address, :tokens, :email)
     end
 end
