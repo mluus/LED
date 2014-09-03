@@ -1,5 +1,6 @@
 class RenteesController < ApplicationController
   before_action :set_rentee, only: [:show, :edit, :update, :destroy, :add_token]
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   # GET /rentees
   # GET /rentees.json

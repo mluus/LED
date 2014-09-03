@@ -11,8 +11,6 @@ class EngineersController < ApplicationController
   # GET /engineers/1
   # GET /engineers/1.json
   def show
-    # @engineers = Engineer.where(rentee_id: params[:rentee_id])
-
   end
 
   # GET /engineers/new
@@ -58,9 +56,7 @@ class EngineersController < ApplicationController
         format.json { render json: @engineer.errors, status: :unprocessable_entity }
       end
     end
-
-
-  end
+end
 
   # DELETE /engineers/1
   # DELETE /engineers/1.json
