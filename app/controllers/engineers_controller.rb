@@ -1,5 +1,7 @@
 class EngineersController < ApplicationController
   before_action :set_engineer, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+  skip_before_filter  :verify_authenticity_token
 
   # GET /engineers
   # GET /engineers.json
@@ -51,13 +53,14 @@ class EngineersController < ApplicationController
     respond_to do |format|
       if @engineer.update(engineer_params)
         format.html { redirect_to [@engineer.rentee, @engineer], notice: 'Engineer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @engineer }
+        format.json { render :show, status: :ok, location: [@engineer.rentee, @engineer] }
       else
         format.html { render :edit }
         format.json { render json: @engineer.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # DELETE /engineers/1
   # DELETE /engineers/1.json
