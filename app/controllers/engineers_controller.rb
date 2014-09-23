@@ -38,7 +38,7 @@ class EngineersController < ApplicationController
 
     respond_to do |format|
       if @engineer.save
-        format.html { redirect_to [@engineer.rentee, @engineer], notice: 'Engineer was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Engineer was successfully created.' }
         format.json { render :show, status: :created, location: @engineer }
       else
         format.html { render :new }
@@ -50,9 +50,27 @@ class EngineersController < ApplicationController
   # PATCH/PUT /engineers/1
   # PATCH/PUT /engineers/1.json
   def update
+    numTokens = params[:engineer][:tokens].to_i
+    engineerId = params[:id]
+    renteeId = params[:rentee_id]
+    engineerTokens = Engineer.find(engineerId).tokens
+    if engineerTokens == nil
+      engineerTokens = 0
+    end
+    renteeTokens = Rentee.find(renteeId).tokens
+
+    if numTokens <= renteeTokens
+      renteeTokens = renteeTokens - numTokens
+      Rentee.update(renteeId, :tokens => renteeTokens)
+      engineerTokens = engineerTokens + numTokens
+
+    else
+      flash[:alert] = "Not enough tokens. Please purchase more!"
+    end
+
     respond_to do |format|
-      if @engineer.update(engineer_params)
-        format.html { redirect_to [@engineer.rentee, @engineer], notice: 'Engineer was successfully updated.' }
+      if @engineer.update(:tokens => engineerTokens)
+        format.html { redirect_to :back, notice: 'Engineer was successfully updated.' }
         format.json { render :show, status: :ok, location: [@engineer.rentee, @engineer] }
       else
         format.html { render :edit }
@@ -60,6 +78,42 @@ class EngineersController < ApplicationController
       end
     end
   end
+
+
+  def associate
+    uuid = params[:device]
+    password = params[:password]
+    puts uuid
+    puts password
+    engineer = Engineer.find_by(password: password)
+    engineer.device = uuid
+    if engineer.save
+        render :json => { }
+    else
+        render :json => { }, :status => 500
+    end
+  end
+
+  def tokenInfo
+    uuid = params[:device]
+    puts uuid
+    engineer = Engineer.find_by(device: uuid)
+    tokens_current = engineer.tokens
+    render json: tokens_current
+  end
+
+
+  def usesToken
+    uuid = params[:device]
+    @engineer = Engineer.find_by(device: uuid)
+    a = @engineer.tokens
+    puts a
+    @engineer.tokens = a - 1
+    @engineer.save
+  end
+
+
+
 
 
   # DELETE /engineers/1
@@ -80,6 +134,6 @@ class EngineersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engineer_params
-      params.require(:engineer).permit(:name, :phone, :tokens)
+      params.require(:engineer).permit(:name, :phone, :tokens ,:password,)
     end
 end

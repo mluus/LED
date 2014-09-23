@@ -16,22 +16,19 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">LOGO</a>
+    <a class="navbar-brand" href="/"><strong>LOGO</strong></a>
   </div>
   <div class="navbar-collapse collapse navbar-inverse-collapse">
-    <ul class="nav navbar-nav">
-
-    </ul>
 
     <ul class="nav navbar-nav navbar-right">
     <% if user_signed_in? %>
-            <li>Logged in as <strong><%= current_user.email %></strong>.</li>
-            <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
-          <% else %>
-            <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %></li>
-            <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link' %></li>
-          <% end %>
+      <li style = "margin-top: 10px;">Logged in as <strong><%= current_user.email %></strong>.</li>
+      <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %></li>
+      <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link' %></li>
+    <% end %>
 
     </ul>
 
@@ -39,19 +36,27 @@
 </div>
 
 <div class="container">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
 
   <div>
     <% if isAdmin? %>
-      <h3>Logged in as Admin.</h3>
+      <h4><p class="text-success">Logged in as Admin.</p></h4>
     <% end %>
+   </div>
+<!--
+ <footer>
+  <div class="footer">
+    <p>© </p>
+    <p class="copyright"></a></p>
+  </div>
+</footer> -->
 
   <%= yield %>
 
-  </div>
 
 </div>
 
 </body>
+
+
+
 </html>

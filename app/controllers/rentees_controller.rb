@@ -39,7 +39,7 @@ class RenteesController < ApplicationController
         @user.rentee = @rentee
         @user.save
 
-        format.html { redirect_to @rentee, notice: 'Rentee was successfully created.' }
+        format.html { redirect_to rentees_url, notice: 'Rentee was successfully created.' }
         format.json { render :show, status: :created, location: @rentee }
       else
         format.html { render :new }
